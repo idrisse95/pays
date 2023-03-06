@@ -23,72 +23,37 @@ export const Acceuil = (props) => {
     pays.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
 
-    //filtrage
-
-    // const [txt, setTxt] = useState('');
-    // const [filtrer, setFiltrer] = useState([]);
-
-
-    // useEffect(() => {
-    //     const filtrer = paysFiltrer.filter((donnee) => donnee.name.common.toLowerCase().includes(txt.toLowerCase()));
-    //     setFiltrer(filtrer);
-    // }, [txt, paysFiltrer])
-
-
-    // const recherche = (e) => {
-    //     setTxt(e.target.value)
-    // }
-
-
-    // //regions
-    // const [region, setRegion] = useState('')
-    // const paysFiltrer = choix(() => {
-    //     if (region === "All") {
-    //       return pays;
-    //     } else {
-    //       return pays.filter(donnee => donnee.region.includes(region));
-    //     }
-    //   }, [pays, region]);
-
-    //  paysFiltrer = region ? pays.filter(donnee => donnee.region.includes(region)) : (txt ? filtrer : pays);
-
-
-    // //
-
+    //filtrer avec le select
     const [txt, setTxt] = useState('');
     const [filtrer, setFiltrer] = useState([]);
     const [region, setRegion] = useState('');
 
     const paysFiltrer = useMemo(() => {
+        
         if (region === "All") {
             return pays;
         } else {
             return region ? pays.filter(donnee => donnee.region.includes(region)) : pays;
         }
     }, [region, pays]);
+    const choix = (e) => {
+        const inpt = e.target.value;
+        setRegion(inpt);
 
+    };
 
+ 
 
-
+    // filter avec l'input recherche
     useEffect(() => {
         const filtrer = pays.filter((donnee) => donnee.name.common.toLowerCase().includes(txt.toLowerCase()));
         setFiltrer(filtrer);
-    }, [txt, pays])
-
-
+    }, [txt, pays, paysFiltrer])
     const recherche = (e) => {
         setTxt(e.target.value);
     };
 
-    const choix = (e) => {
-        const region = e.target.value;
-        console.log(region);
-        setRegion(region);
 
-        if (region === "All") {
-            setTxt('');
-        }
-    };
 
 
 
@@ -97,11 +62,11 @@ export const Acceuil = (props) => {
         <div className={`${props.un} flex py-4 justify-center`}>
             <div className='flex flex-col w-[80%]'>
                 <div className='flex justify-between my-4'>
-                    <div className='bg-white py-3 px-5 flex w-[40%]'>
+                    <div className={`${props.deux} text-black py-3 px-5 flex w-[40%]`}>
                         <label className='mr-2' htmlFor=""><i className="fa-solid fa-magnifying-glass"></i></label>
                         <input className='bg-tranparent border-0 focus:border-blue-500 h-full w-full pl-2' type="text" value={txt} onChange={recherche} placeholder="Shearch for a Country" />
                     </div>
-                    <div><select className='px-4 py-3 text-sm font-semibold bg-white border shadow-md' onClick={choix} name="" id="">
+                    <div><select className={`px-4 py-3 text-sm font-semibold  border shadow-md ${props.deux}`} onClick={choix} name="" id="">
                         <option value="All">All regions</option>
                         <option value="Africa">Afrique</option>
                         <option value="Americas">Amériques</option>
@@ -120,6 +85,7 @@ export const Acceuil = (props) => {
                                     <div><span className='font-bold'>Population: </span>{donnee.population}</div>
                                     <div><span className='font-bold'>Region: </span>{donnee.region}</div>
                                     <div><span className='font-bold'>Region: </span>{donnee.capital}</div>
+                                    
                                 </div>
                             </Link>
                         ))}

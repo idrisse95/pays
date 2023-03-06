@@ -11,7 +11,7 @@ export const Choix = (props) => {
                 <span className='mb-7'>
                     <Link className={`px-4 py-3 text-sm font-semibold ${props.deux}  shadow-md`} to="/">Back</Link>
                 </span>
-                <div className='flex w-full h-[500px] '>
+                <div className='flex w-full h-[400px] '>
                     <div className='w-[50%] h-full'><img src={props.img} className="w-full h-full " alt="" /></div>
                     <div className='w-[50%] ml-[5%] '>
                         <p className='font-bold text-2xl mb-4'>{props.nom}</p>
@@ -28,6 +28,9 @@ export const Choix = (props) => {
                                 <p className='mb-3'><span className='font-bold'>Currencies:</span>  {props.currencies}</p>
                                 <p className='mb-3'><span className='font-bold'>Languages:</span>  {props.Languages}</p>
                             </div>
+                        </div>
+                        <div className='mt-20'>
+                            <p><span className='font-bold'>Pays limitrophe: </span>{props.limitrophe}</p>
                         </div>
                     </div>
                 </div>
