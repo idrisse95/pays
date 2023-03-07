@@ -15,7 +15,7 @@ function App() {
   const [limitrophe, setLimitrophe] = useState('')
   const [domain, setDomain] = useState('')
   const [currencies, setCurrencies] = useState('')
-  const [Languages, setLanguages] = useState('')
+  const [selectedLanguages, setSelectedLanguages] = useState('');
 
   const [charge, setCharge] = useState("hidden")
   
@@ -29,19 +29,20 @@ function App() {
     setCapital(donnee.capital)
     setLimitrophe(donnee.borders)
     setDomain(donnee.tld)
-    setCurrencies(donnee.name.common)
+    setCurrencies(donnee.currencies)
+    setSelectedLanguages(donnee.languages);
 
-    setLanguages(donnee.name.common)
     setCharge('block')
     window.scrollTo(0, 0);
     setTimeout(() => {
       setCharge('hidden')
-    }, 400);
+    }, 600);
 
     // donnee.forEach(objet => {
     //   console.log(objet[currencies].name);
     // });
 
+    
 
 
   }
@@ -62,9 +63,9 @@ function App() {
       
         <div type="button" className={`bg-indigo-500 absolute flex justify-center pt-[300px] w-full h-full ${charge}`} disabled>
           <svg width="150" height="150" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-            <g fill="none" fill-rule="evenodd">
-              <g transform="translate(1 1)" stroke-width="2">
-                <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+            <g fill="none" fillRule="evenodd">
+              <g transform="translate(1 1)" strokeWidth="2">
+                <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
                 <path d="M36 18c0-9.94-8.06-18-18-18">
                   <animateTransform
                     attributeName="transform"
@@ -91,7 +92,7 @@ function App() {
         </div>
         <Routes>
           <Route path='/' element={<Acceuil choisi={choisi} un={un} deux={deux} />} />
-          <Route path='/acceuil/choix/:id' element={<Choix deux={deux} img={img} nom={nom} un={un} native={native} population={population} regionc={regionc} sub={sub} capital={capital} domain={domain} currencies={currencies} limitrophe={limitrophe} Languages={Languages} />} />
+          <Route path='/acceuil/choix/:id' element={<Choix deux={deux} img={img} nom={nom} un={un} native={native} population={population} regionc={regionc} sub={sub} capital={capital} domain={domain} currencies={currencies} limitrophe={limitrophe} selectedLanguages={selectedLanguages} />} />
         </Routes>
       </div>
 

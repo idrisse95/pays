@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export const Choix = (props) => {
+    console.log(props.selectedLanguages);
+   
 
 
 
@@ -25,12 +27,23 @@ export const Choix = (props) => {
                             </div>
                             <div>
                                 <p className='mb-3'><span className='font-bold'>Top Level Domain:</span>  {props.domain}</p>
-                                <p className='mb-3'><span className='font-bold'>Currencies:</span>  {props.currencies}</p>
-                                <p className='mb-3'><span className='font-bold'>Languages:</span>  {props.Languages}</p>
+                                <p className='mb-3'><span className='font-bold'>Currencies:</span>  {Object.values(props.currencies).map((curr, index) => (
+                                    <span key={index}>{curr.name}</span>
+                                ))}</p>
+                                <p className='mb-3'><span className='font-bold'>Languages:</span>  {Object.values(props.selectedLanguages).map((language, index) => (
+                                    <span className='mr-2' key={index}>{language}</span>
+                                ))}</p>
                             </div>
                         </div>
                         <div className='mt-20'>
-                            <p><span className='font-bold'>Pays limitrophe: </span>{props.limitrophe}</p>
+                            <div><span className='font-bold'>Pays limitrophe: </span>
+
+                                <div className='flex gap-5'>
+                                    {props.limitrophe === undefined ? <div>Aucun</div> : Object.values(props.limitrophe).map((bord, index) => (
+                                        <Link to={`/acceuil/choix/:${props.nom}`} onClick={props.limClick}  className='border px-3 py-2 bg-gray-400' key={index}>{bord}</Link>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
